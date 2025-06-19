@@ -188,7 +188,7 @@ export default function AttackOnTitanWebsite() {
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.9) contrast(1.2)' }}
           >
-            <source src="/video.mp4" type="video/mp4" />
+            <source src="/videos/video.mp4" type="video/mp4" />
             <source src="/video.webm" type="video/webm" />
             Your browser does not support the video tag.
           </video>

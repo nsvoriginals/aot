@@ -1,7 +1,8 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    output: 'export', // ← this enables static export
+// next.config.js
+module.exports = {
+  output: 'export', // This enables static export
+  trailingSlash: true, // Optional: creates /about/ instead of /about
+  images: {
+    unoptimized: true // Required for static exports
   }
-  
-  module.exports = nextConfig;
-  
+}

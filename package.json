@@ -2,12 +2,12 @@
   "name": "aot",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+ "scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "serve": "npm run build && npx serve out -p 3000",
+  "start": "next start"
+},
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "framer-motion": "^12.18.1",
