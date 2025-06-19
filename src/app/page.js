@@ -42,6 +42,7 @@ export default function AttackOnTitanWebsite() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [navOpen, setNavOpen] = useState(false);
   const titleRef = useRef(null);
   const heroRef = useRef(null);
   const videoRef = useRef(null);
@@ -124,26 +125,53 @@ export default function AttackOnTitanWebsite() {
         </div>
         
         {/* Content */}
-        <div className="relative z-10 flex items-center justify-between px-8 py-4">
+        <div className="relative z-10 flex items-center justify-between px-4 md:px-8 py-3 md:py-4">
           {/* Logo - Japanese Name Only */}
           <div className="flex items-center">
-            <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400" style={{ fontFamily: 'Ditty, sans-serif' }}>
+            <div className="text-xl md:1xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400" style={{ fontFamily: 'Ditty, sans-serif' }}>
               進撃の巨人
             </div>
           </div>
-          
+          {/* Hamburger for mobile */}
+          <button
+            className="md:hidden flex flex-col justify-center items-center w-10 h-10 focus:outline-none relative z-20"
+            aria-label="Open navigation menu"
+            onClick={() => setNavOpen((v) => !v)}
+          >
+            <span className={`block w-6 h-0.5 bg-white mb-1 transition-all duration-300 ${navOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-white mb-1 transition-all duration-300 ${navOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${navOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+          </button>
           {/* Navigation Links */}
-          <div className="flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {['NEWS', 'WATCH', 'WIKI'].map((item, index) => (
               <button key={item} 
                       className="relative text-white hover:text-gray-300 transition-all duration-300 group"
                       style={{ animationDelay: `${index * 0.1}s` }}>
-                <span className="relative z-10">{item}</span>
+                <span className="relative z-10 text-5md">{item}</span>
                 <div className="absolute inset-0 bg-white/20 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-white to-gray-400 group-hover:w-full transition-all duration-500"></div>
               </button>
             ))}
           </div>
+          {/* Mobile Nav Dropdown */}
+          {navOpen && (
+            <div className="fixed inset-0 z-10 md:hidden" onClick={() => setNavOpen(false)}>
+              <div className="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+              <div className="absolute top-0 right-0 w-2/3 max-w-xs h-full bg-black/95 shadow-lg flex flex-col items-start pt-24 px-8 gap-6 animate-fade-in-up">
+                {['NEWS', 'WATCH', 'WIKI'].map((item, index) => (
+                  <button
+                    key={item}
+                    className="w-full text-left text-white text-xl py-2 border-b border-white/10 hover:text-gray-300 transition-all duration-300"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                    onClick={() => setNavOpen(false)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
